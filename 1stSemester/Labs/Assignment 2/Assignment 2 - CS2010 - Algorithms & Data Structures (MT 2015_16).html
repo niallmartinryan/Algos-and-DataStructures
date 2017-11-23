@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="https://www.scss.tcd.ie/tms/m/styles/favicon.ico">
+
+    <title>Assignment 2 - CS2010 - Algorithms &amp; Data Structures (MT 2015/16) </title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="Assignment%202%20-%20CS2010%20-%20Algorithms%20&amp;%20Data%20Structures%20%28MT%202015_16%29_files/bootstrap_Cerulean.css" rel="stylesheet" class="SelectedTheme">
+
+    <!-- Custom styles for this template -->
+    <link href="Assignment%202%20-%20CS2010%20-%20Algorithms%20&amp;%20Data%20Structures%20%28MT%202015_16%29_files/Bootstrap3.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://www.scss.tcd.ie/Vasileios.Koutavas/teaching/cs2010/michaelmas1516/theme/Bootstrap3/js/html5shiv.js"></script>
+      <script src="https://www.scss.tcd.ie/Vasileios.Koutavas/teaching/cs2010/michaelmas1516/theme/Bootstrap3/js/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="canonical" href="https://www.scss.tcd.ie/Vasileios.Koutavas/teaching/cs2010/michaelmas1516/assignment-2/">
+<script src="Assignment%202%20-%20CS2010%20-%20Algorithms%20&amp;%20Data%20Structures%20%28MT%202015_16%29_files/timeline.js" async="" charset="utf-8" type="text/javascript"></script></head>
+  <body id="assignment-2">
+    <div class="navbar navbar-inverse navbar-fixed-top" id="NavBar">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="https://www.scss.tcd.ie/Vasileios.Koutavas/teaching/cs2010/michaelmas1516/">CS2010 - Algorithms &amp; Data Structures (MT 2015/16) </a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="lectures"><a href="https://www.scss.tcd.ie/Vasileios.Koutavas/teaching/cs2010/michaelmas1516/lectures/" title="Reading Material &amp; Lectures">Reading Material &amp; Lectures</a></li>
+<li class="assignments-labs"><a href="https://www.scss.tcd.ie/Vasileios.Koutavas/teaching/cs2010/michaelmas1516/assignments-labs/" title="Assignments &amp; Labs">Assignments &amp; Labs</a></li>
+<li class="marking"><a href="https://www.scss.tcd.ie/Vasileios.Koutavas/teaching/cs2010/michaelmas1516/marking/" title="Marking">Marking</a></li>
+<li class="contact"><a href="https://www.scss.tcd.ie/Vasileios.Koutavas/teaching/cs2010/michaelmas1516/contact/" title="Contact">Contact</a></li>
+          </ul>
+                  </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-8">
+          <div><strong>Part 1 Deadline: <span style="background-color:yellow;">23:59 Thursday 29 October 2015 </span><del>Monday 26 October 2015</del></strong></div>
+<p><strong>Part 1 points: 200 (</strong>Q1: 80; Q2: 40; Q3: 80)</p>
+<div class="alert alert-danger">
+	<h4>Bugs, news, etc.</h4>
+	<p>Make sure to check this section reqularly for more instuctions about the assignment.</p>
+	<ul>
+		<li><strong>21/10/2015:</strong> deadline extension (see above).</li>
+		<li><strong>12/10/2015: </strong>There is a <a href="http://dsvproject.github.io/dsvproject/code/doublyLinkedList.html">visualisation</a>
+ of the doubly-linked list methods which shows what needs to be 
+implemented in Part 1 of this assignment. (This was done by two 
+students, one of which took this module last year.)</li>
+	</ul>
+</div>
+<h4>General Instructions:</h4>
+<ul>
+	<li>Use the template files for writing your code and add necessary comments to critical sections of the code.</li>
+	<li>Write your name next to&nbsp;@author at the beginning of each file</li>
+	<li>Write the names of people you discussed this assignment with under the @author line.&nbsp;<strong>Do not share code and do not write code for others!</strong></li>
+	<li>You need to adequately&nbsp;test each method in your source code by adding sufficient jUnit tests to the those provided.</li>
+	<li>In certain parts of the assignment where you are asked to answer a 
+question or explain something in particular, add this as a block comment
+ at the beginning of the assignment's main java file.</li>
+	<li>Do not import data structures from the java libraries.&nbsp;This will result in a heavy point penalty!</li>
+</ul>
+<h4>Generic Data Structures in Java</h4>
+<p>Review the lecture notes about Java Generics and Iterators.&nbsp;</p>
+<p>In this assignment we will use the following implemetation of a generic class of nodes of the Doubly Linked List in Part 1:</p>
+<pre>/**
+* Class DoublyLinkedList: implements a *generic* Doubly Linked List.
+* @param &lt;T&gt; This is a type parameter. T is used as a class name in the
+* definition of this class.
+*
+* When creating a new DoublyLinkedList, T should be instantiated with an
+* actual class name that extends the class Comparable.
+* Such classes include String and Integer.
+*
+* For example to create a new DoublyLinkedList class containing String data:
+*&nbsp;&nbsp;&nbsp; DoublyLinkedList&lt;String&gt; myStringList = new DoublyLinkedList&lt;String&gt;();
+*
+* The class implements the Iterable&lt;T&gt; interface, allowing to use iterators
+* over the data stored in the doubly-linked list. This is already implemented.
+*
+* The class offers a toString() method which returns a comma-separated sting of
+* all elements in the data structure.
+*
+* This is a bare minimum class you would need to completely implement.
+* You can add additional methods to support your code. Each method will need
+* to be tested by your jUnit tests -- for simplicity in jUnit testing
+* introduce only public methods.
+*/
+class DoublyLinkedList&lt;T extends Comparable&lt;T&gt;&gt; implements Iterable&lt;T&gt;</pre>
+<p>The above definition has a peculiarity: the parameter of the <code>DLLNode</code> is <code>T extends Comparable&lt;T&gt;</code>, which is called a <strong>bounded type parameter.</strong>&nbsp;This tells the java compiler that we only want to instantiate the <code>DLLNode</code> class with a parameter class that implements the <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Comparable.html"><code>Comparable</code> interface</a>. Because the comparable interface is itself generic, we have to specify that the classes we want to allow in the place of <code>T</code> here are those whose objects can be compared with other objects of the same class; i.e., we want a class <code>T</code> containing a method <code>int compareTo(T o)</code>.</p>
+<h4>Doubly Linked List</h4>
+<p>A doubly linked list is a data structure maintaining a sequence of 
+data elements, similar to a linked list data structure. The difference 
+here is that from each data elements in the sequence we can move to the 
+previous and next element with a Θ(1) operation. This is achieved by 
+maintaining for each data element two references: one to the previous 
+element and one to the next one (the prev and next fields of the DLLNode
+ class). Doubly linked lists have been discussed in the lectures.</p>
+<h5>Question 1: DLL implementation</h5>
+<p>Here you need to implement the methods in <a href="https://www.scss.tcd.ie/Vasileios.Koutavas/teaching/cs2010/michaelmas1516/data/uploads/DoublyLinkedList.java">DoublyLinkedList.java</a>. This class stores a doubly linked list of <code>DLLNode</code>&nbsp;objects.</p>
+<pre>    /**
+     * private class DLLNode: implements a *generic* Doubly Linked List node.
+     */
+    private class DLLNode
+    {
+        public final T data;
+        public DLLNode next;
+        public DLLNode prev;
+    
+        /**
+         * Constructor
+         * @param theData : data of type T, to be stored in the node
+         * @param prevNode : the previous Node in the Doubly Linked List
+         * @param nextNode : the next Node in the Doubly Linked List
+         * @return DLLNode
+         */
+        public DLLNode( T theData, DLLNode prevNode, DLLNode nextNode ) 
+        {
+          data = theData;
+          prev = prevNode;
+          next = nextNode;
+        }
+    }
+</pre>
+<p>Each DLLNode object has three fields, a <code>data</code> field of type T, a reference (<code>prev</code>) to the previous node&nbsp;in the list and a reference (<code>next</code>) to the next node in the list. The <code>data</code> field is <code>final</code>, meaning that <a href="https://en.wikipedia.org/wiki/Final_%28Java%29#Final_variables">once set by the constructor it should never change</a>.</p>
+<p>The DoublyLinkedList class and has two important fields:</p>
+<pre>private DLLNode head, tail;</pre>
+<p>The first (<code>head</code>) is a reference to the first element of the list and the other (<code>tail</code>)
+ is a reference to the last element of the list. These fields are 
+initialised to null when an object of the class is constructed.</p>
+<p><strong>If the list is empty then both <code>head</code> and <code>tail</code> are null.</strong> If the list is non-empty then both <code>head</code> and <code>tail</code> are not null. There is no situation where only one of these fields is null.</p>
+<p>If the list contains one element then <code>head</code> and <code>tail</code> reference this same element.</p>
+<p>All insert and delete operations need to properly update the <code>head</code> and <code>tail</code> fields. They also need to properly update the <code>.prev</code> and <code>.next</code> fields in the nodes of the list.</p>
+<ul>
+	<li><code>isEmpty()</code>: returns true if the list is empty and false otherwise.</li>
+	<li><code>insertBefore(int pos, T data)</code>: inserts data before the
+ element in the i-th position in the list. The first element in the list
+ (head) is at position 0.&nbsp;If pos is less than 0 then add to the 
+head of the list.&nbsp;If pos is greater or equal to the size of the 
+list then add the&nbsp;element at the end of the list.</li>
+	<li><code>get(int pos)</code>: returns the element at position <code>pos</code> (the head is at position 0) if <code>pos</code> is within the bounds of the list. If <code>pos</code> is negative of too large it returns null.</li>
+	<li><code>deleteAt(int pos)</code>: deletes element at position <code>pos</code> in the list (the head is at position 0) if <code>pos</code> is within the bounds of the list.&nbsp;It returns true if a deletion was performed.</li>
+</ul>
+<p>You will be graded for correctly implementing and adequately testing the above methods. Download the jUnit test file <a href="https://www.scss.tcd.ie/Vasileios.Koutavas/teaching/cs2010/michaelmas1516/data/uploads/DoublyLinkedListTest.java">DoublyLinkedListTest.java</a> and add more tests in it so that every method, line of code and if-then-else branching decision is tested at least once.</p>
+<h5>Question 2: Stack &amp; Queue</h5>
+<p>Implement the&nbsp;<code>push</code> and a <code>pop</code> methods in the class such that if only these two methods are called, an object of the class would behave like a stack.</p>
+<p>Implement the&nbsp;<code>enqueue</code> and <code>dequeue</code> methods in the class such that if only these two methods are called, an object of the class would behave like a FIFO queue.</p>
+<h5>Question 3: Asymptotic worst-case running time</h5>
+<p>For each method in the file DoublyLinkedList.java add a comment at 
+the beginning of the method stating the Theta asymptotic, worst-case 
+running time of that method. Also in comments, justify this statement 
+with a few sentences. Each basic operation may be assumed to take 
+Theta(1) time to execute. Also, calls to Java methods may be assumed to 
+take Theta(1) time. <u><strong>However, the execution of calls to methods you have implemented will take the time you have calculated for these methods</strong></u>. See the toString method already implemented in the file for an example.</p>
+<p>&nbsp;</p>
+        </div>
+        
+        <div class="col-md-4">
+          <h2>News</h2>
+
+<div>
+<iframe title="Twitter Timeline" data-widget-id="646843697884098560" style="position: static; visibility: visible; display: inline-block; width: 100%; height: 600px; padding: 0px; border: medium none; max-width: 520px; min-width: 180px; min-height: 200px; margin-top: 0px; margin-bottom: 0px;" class="twitter-timeline twitter-timeline-rendered" allowfullscreen="true" allowtransparency="true" scrolling="no" id="twitter-widget-0" frameborder="0"></iframe>
+<script src="Assignment%202%20-%20CS2010%20-%20Algorithms%20&amp;%20Data%20Structures%20%28MT%202015_16%29_files/widgets.js" id="twitter-wjs"></script><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div>
+<!--div>
+<a class="twitter-timeline" data-chrome="nofooter transparent" data-dnt="true" href="https://twitter.com/TCD_CS2010" data-widget-id="513953885497466880">News by @TCD_CS2010</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div-->
+
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>Last Update: Wednesday, October 21st, 2015 - 3:51 PM </p>
+      </footer>
+
+    </div> <!-- /container -->
+    
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="Assignment%202%20-%20CS2010%20-%20Algorithms%20&amp;%20Data%20Structures%20%28MT%202015_16%29_files/jquery-1.js"></script>
+    <script src="Assignment%202%20-%20CS2010%20-%20Algorithms%20&amp;%20Data%20Structures%20%28MT%202015_16%29_files/jquery.js"></script>
+    <script src="Assignment%202%20-%20CS2010%20-%20Algorithms%20&amp;%20Data%20Structures%20%28MT%202015_16%29_files/jquery_002.js"></script>
+    <script src="Assignment%202%20-%20CS2010%20-%20Algorithms%20&amp;%20Data%20Structures%20%28MT%202015_16%29_files/bootstrap.js"></script>
+    <script>
+      if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+        var msViewportStyle = document.createElement("style")
+        msViewportStyle.appendChild(
+          document.createTextNode(
+            "@-ms-viewport{width:auto!important}"
+          )
+        )
+        document.getElementsByTagName("head")[0].appendChild(msViewportStyle)
+      }
+    </script>
+
+    
+      
+</body></html>

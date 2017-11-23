@@ -1,0 +1,157 @@
+/**
+ * Class FacebookCircles: calculates the statistics about the friendship circles in facebook data.
+ *
+ * @author
+ *
+ * @version 01/12/15 02:03:28
+ */
+public class FacebookCircles {
+	private int N;
+	private int[] id;
+ 	private int[] size;
+ 	private boolean[] checked;
+  /**
+   * Constructor
+   * @param numberOfFacebookUsers : the number of users in the sample data.
+   * Each user will be represented with an integer id from 0 to numberOfFacebookUsers-1.
+   */
+  public FacebookCircles(int numberOfFacebookUsers) {
+  	N = numberOfFacebookUsers;
+     id = new int[numberOfFacebookUsers];
+     size = new int[numberOfFacebookUsers];
+     for(int i=0; i< size.length;i++){
+      	size[i] = 1;
+     }
+     checked = new boolean[numberOfFacebookUsers];
+     // could use the default function..
+     for(int i =0; i< checked.length;i++){
+     		checked[i] = false;
+     }
+     for (int i = 0; i < N; i++) id[i] = i;
+  }
+
+  /**
+   * creates a friendship connection between two users, represented by their corresponding integer ids.
+   * @param user1 : int id of first user
+   * @param user2 : int id of second  user
+   */
+  public void friends( int p, int q ) {
+	int i = find(p);
+ 	int j = find(q);
+	if (i == j) return;
+ 	if  (size[i] < size[j]) { id[i] = j; size[j] += size[i]; } 
+ 	else                { id[j] = i; size[i] += size[j]; } 
+  }
+  /**	
+  
+  
+  **/
+  public int find(int i)
+   {
+      while (i != id[i])
+   	{
+     		id[i] = id[id[i]];
+      	i = id[i];
+   	}
+   	return i;
+   }
+   
+   // keep going to the parent, until it points to itself
+  
+  
+  /**
+   * @return the number of friend circles in the data already loaded.
+   */
+  public int numberOfCircles() {
+    resetChecks();
+    int count =0;
+    for(int i=0 ;i< id.length;i++){
+    	int index = find(i);
+    	if(checked[index]== false){
+    		checked[index] = true;
+    		count++;
+    	}
+    }
+    resetChecks();
+    return count;
+  }
+
+  /**
+   * @return the size of the largest circle in the data already loaded.
+   */
+  public int sizeOfLargestCircle() {
+    // TODO
+    int highest =0;
+    for(int i=0; i< id.length;i++){
+    	if(size[i]> highest){
+    		highest = size[i];
+    	}
+    }
+    return highest;
+  }
+
+  /**
+   * @return the size of the median circle in the data already loaded.  S1+S2..Sn / #circles;
+   */
+  public int sizeOfAverageCircle() {
+    // TODO
+    int avg;
+    int total = 0;
+    for(int i =0; i< id.length; i++){
+    	int root = find(i);
+    	if(checked[root]==false){
+    		checked[root] = true;
+    		total += size[root];
+    	}
+    }
+    avg = total/ numberOfCircles();
+    return avg;
+  }
+
+  /**
+   * @return the size of the smallest circle in the data already loaded.
+   */
+  public int sizeOfSmallestCircle() {
+    int smallest = size[find(0)];
+    for(int i=0; i< N ; i++){
+    	int root = find(i);
+    	if(size[root]< smallest){
+    		smallest = size[root];
+    	}
+    }
+    return smallest;
+  }
+  public void resetChecks(){
+  	for(int i=0; i<N ; i++){
+  		checked[i] = false;
+  	}
+  }
+  public static void main(String [] args){
+  
+		FacebookCircles myCircles = new FacebookCircles(20);
+		myCircles.friends(1,2);
+		myCircles.friends(1,3);
+		myCircles.friends(4,5);
+		myCircles.friends(2,4);
+		myCircles.friends(2,3);
+		myCircles.friends(3,6);
+		myCircles.friends(2,14);
+		myCircles.friends(3,11);
+		myCircles.friends(11,12);
+		myCircles.friends(7,8);
+		myCircles.friends(7,13);
+		myCircles.friends(9,10);
+		myCircles.friends(15,18);
+		myCircles.friends(15,16);
+		myCircles.friends(15,17);
+		myCircles.friends(19,0);
+		System.out.println("Number of circles : "+ myCircles.numberOfCircles());
+		System.out.println("Size of largest Circle : " + myCircles.sizeOfLargestCircle());
+		
+		System.out.println("Median size Circle : " + myCircles.sizeOfAverageCircle());
+		System.out.println("Size of smallest Circle : " + myCircles.sizeOfSmallestCircle());
+	
+	}
+
+
+}
